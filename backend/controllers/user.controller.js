@@ -56,13 +56,12 @@ export const register = async (req, res) => {
         // user.token = token;
         // await user.save();
         res.cookie("jwt", token, {
-            httpOnly: true,       //xss
+            httpOnly: false,       //xss
             secure: true,
-            sameSite: 'none',
-            maxAge: 7 * 24 * 60 * 60 * 1000
+            sameSite: 'none'
         })
 
-
+        
         res.status(200).json({
             success: true,
             message: "User regitered successfully", newUser
@@ -96,7 +95,7 @@ export const login = async (req, res) => {
         if (!isCompare) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid credentials"
+                message: "Invalid credentials" 
             })
         }
         if (user.role !== role) {
@@ -110,12 +109,12 @@ export const login = async (req, res) => {
         // user.token = token;
         // await user.save();
         res.cookie("jwt", token, {
-            httpOnly: true,       //xss
+            httpOnly: false,       //xss
             secure: true,
-            sameSite: 'none',
-            maxAge: 7 * 24 * 60 * 60 * 1000
+            sameSite: 'none'
         })
 
+        console.log("Cookie sent")
         res.status(200).json({
             success: true,
             message: "User logged in successfully",
@@ -138,11 +137,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        res.clearCookie("jwt", {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none"
-        })
+        res.clearCookie("jwt", { httpOnly: true })
         res.status(200).json({
             success: true,
             message: "User logged out successfully"

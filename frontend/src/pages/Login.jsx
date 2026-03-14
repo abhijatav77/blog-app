@@ -28,14 +28,14 @@ const Login = () => {
 
       console.log(data)
       toast.success(data?.message || "User logged in successfully")
-      setProfile(data.user)
+      setProfile(data)
       setIsAuthenticated(true)
       setEmail("")
       setPassword("")
       setRole("")
       navigate('/')
     } catch (error) {
-      console.log(error.message)
+      console.log(error)
       toast.error(error?.response?.data?.message)
     }
   }
