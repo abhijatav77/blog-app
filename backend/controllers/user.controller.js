@@ -56,9 +56,9 @@ export const register = async (req, res) => {
         // user.token = token;
         // await user.save();
         res.cookie("jwt", token, {
-            httpOnly: false,       //xss
+            httpOnly: true,       //xss
             secure: true,
-            sameSite: 'none'
+            sameSite: 'strict'
         })
 
         
@@ -109,12 +109,11 @@ export const login = async (req, res) => {
         // user.token = token;
         // await user.save();
         res.cookie("jwt", token, {
-            httpOnly: false,       //xss
+            httpOnly: true,       //xss
             secure: true,
-            sameSite: 'none'
+            sameSite: 'strict'
         })
 
-        console.log("Cookie sent")
         res.status(200).json({
             success: true,
             message: "User logged in successfully",
