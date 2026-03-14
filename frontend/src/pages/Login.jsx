@@ -28,7 +28,7 @@ const Login = () => {
 
       console.log(data)
       toast.success(data?.message || "User logged in successfully")
-      setProfile(data)
+      setProfile(data.user)
       setIsAuthenticated(true)
       setEmail("")
       setPassword("")

@@ -58,10 +58,11 @@ export const register = async (req, res) => {
         res.cookie("jwt", token, {
             httpOnly: true,       //xss
             secure: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
-        
+
         res.status(200).json({
             success: true,
             message: "User regitered successfully", newUser
@@ -95,7 +96,7 @@ export const login = async (req, res) => {
         if (!isCompare) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid credentials" 
+                message: "Invalid credentials"
             })
         }
         if (user.role !== role) {
@@ -111,7 +112,8 @@ export const login = async (req, res) => {
         res.cookie("jwt", token, {
             httpOnly: true,       //xss
             secure: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
         res.status(200).json({
@@ -136,7 +138,11 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        res.clearCookie("jwt", { httpOnly: true })
+        res.clearCookie("jwt", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        })
         res.status(200).json({
             success: true,
             message: "User logged out successfully"
