@@ -58,7 +58,7 @@ export const register = async (req, res) => {
         res.cookie("jwt", token, {
             httpOnly: true,       //xss
             secure: true,
-            sameSite: 'strict'
+            sameSite: 'none'
         })
 
         
@@ -111,7 +111,7 @@ export const login = async (req, res) => {
         res.cookie("jwt", token, {
             httpOnly: true,       //xss
             secure: true,
-            sameSite: 'strict'
+            sameSite: 'none'
         })
 
         res.status(200).json({
