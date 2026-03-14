@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if(!isAuthenticated) return;
     const fetchProfile = async () => {
       try {
           const { data } = await axios.get(`${BACKEND_URL}/users/my-profile`, {
